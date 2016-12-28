@@ -1,25 +1,24 @@
-<ion-view title="Settings" hide-nav-bar="true" id="page3" style="background-color:#000000;">
-  <ion-content padding="true" class="manual-ios-statusbar-padding" scroll="false">
-    <div class="spacer" style="width: 300px; height: 9px;"></div>
-    <h2 id="settings-heading1" style="color:#B4B4B4;text-align:center;">URL</h2>
-    <form id="settings-form2" class="list">
-      <label class="item item-input" id="settings-input1" name="url">
-        <span class="input-label">url</span>
-        <input type="text" placeholder="url">
-      </label>
-      <div id="settings-markdown1" class="show-list-numbers-and-dots">
-        <p style="color:#B4B4B4;font-size:11px;">Example: https://agent.electricimp.com/YmAFVeg-RnYv</p>
-      </div>
-    </form>
-    <h2 id="settings-heading2" style="color:#B4B4B4;text-align:center;">Key</h2>
-    <form id="settings-form3" class="list">
-      <label class="item item-input" id="settings-input2" name="key">
-        <span class="input-label">Key</span>
-        <input type="text" placeholder="key">
-      </label>
-      <div id="settings-markdown2" class="show-list-numbers-and-dots">
-        <p style="color:#B4B4B4;font-size:11px;">Your 6 digit key included with feeder.</p>
-      </div>
-    </form>
-  </ion-content>
-</ion-view>
+<ion-view title="Settings" hide-nav-bar="true" id="page3" style="background-color:#000000;" class=" ">
+    <ion-content padding="true" class="manual-ios-statusbar-padding" scroll="false">
+        <div class="">
+            <img src="img/CnfFof0YSta64SXJDZbc_Screen Shot 2016-07-21 at 6.48.14 PM.png" width="100%" height="auto" style="display: block; margin-left: auto; margin-right: auto;">
+        </div>
+        <div class="spacer" style="width: 300px; height: 9px;"></div>
+        <h1 id="settings-heading1" style="color:#B4B4B4;text-align:center;" class=" ">Pet Feeder</h1>
+    <div class="spacer" style="width: 300px; height: 33px;"></div>
+            <label class="item item-input " id="settings-input1" name="url">
+                <span class="input-label">url</span>
+                <input type="text" ng-model="Data.url">
+            </label>
+            <p id="settings-markdown1" style="color:#B4B4B4;font-size:11px;" class=" ">Example: https://agent.electricimp.com/YmAFVeg-RnYv</p>
+
+        <h2 id="settings-heading2" style="color:#B4B4B4;text-align:center;" class=" "></h2>
+ 
+            <label class="item item-input " id="settings-input2" name="key">
+                <span class="input-label">key</span>
+                <input type="text" ng-model="Data.key">
+            </label>
+            <p id="settings-markdown2" style="color:#B4B4B4;font-size:11px;" class=" ">Your 6 digit key included with feeder.</p>
+
+    </ion-content>
+</ion-view> 

@@ -1,19 +1,25 @@
-<ion-view title="Pet Feeder" hide-nav-bar="true" id="page2" style="background-color:#000000;">
-  <ion-content padding="true" class="manual-ios-statusbar-padding" scroll="false">
-    <div>
-      <img src="img/CnfFof0YSta64SXJDZbc_ScreenShot2016-07-21at6.48.14PM.png" style="display: block; width: 100%; height: auto; margin-left: auto; margin-right: auto;">
-    </div>
-    <form id="petFeeder-form1" class="list">
-      <div class="spacer" style="width: 300px; height: 33px;"></div>
-      <ion-item class="range range-dark" id="petFeeder-range1">Amount
-        <input type="range" value="3" min="1" max="10" step="1" name="slider">
-      </ion-item>
-    </form>
-    <div class="spacer" style="width: 300px; height: 41px;"></div>
-    <button id="petFeeder-button1" style="font-weight:600;color:#222222;font-size:18px;border-radius:16px 16px 16px 16px;" class="button button-energized  button-block">Feed</button>
-    <div class="spacer" style="width: 300px; height: 44px;"></div>
-    <div id="petFeeder-markdown3" class="show-list-numbers-and-dots">
-      <p style="color:#D3D3D3;">Messaging</p>
-    </div>
-  </ion-content>
+<ion-view title="Pet Feeder" hide-nav-bar="true" id="page2" style="background-color:#000000;" class=" ">
+    <ion-content padding="true" class="manual-ios-statusbar-padding" scroll="false">
+        <div class="">
+            <img src="img/CnfFof0YSta64SXJDZbc_Screen Shot 2016-07-21 at 6.48.14 PM.png" width="100%" height="auto" style="display: block; margin-left: auto; margin-right: auto;">
+        </div>
+             <div class="spacer" style="width: 300px; height: 9px;"></div>
+        <h1 id="settings-heading2" style="color:#B4B4B4;text-align:center;" class=" ">Pet Feeder</h1>
+        <form id="petFeeder-form1" ng-submit="submitForm(data)" class="list ">
+            <div class="spacer" style="width: 300px; height: 33px;"></div>
+            <ion-item ng-hide="!Data.feeding" class="range " style="background-color:#000; color:#DDD; border:none; padding-bottom:60px; padding-top:25px" >Amount
+                <input type="range" value="5" min="1" max="10" name="slider2" ng-model="Data.amount" id="amount">
+            </ion-item>
+            <button  value="Submit" ng-disabled="!Data.key&&!Data.url" ng-hide="!Data.feeding" id="petFeeder-button1" style="font-weight:600;color:#222222;font-size:18px;border-radius:16px 16px 16px 16px;" class=" button button-energized  button-block ">Feed</button>
+            <img ng-hide="Data.feeding" src="img/cat.png" width="100%" height="auto" style="display: block; margin-left: auto; margin-right: auto;">
+
+        </form>
+        <div ng-hide="!Data.feeding" class="spacer" style="width: 300px; height: 41px;"></div>
+        <div ng-hide="!Data.feeding" class="spacer" style="width: 300px; height: 44px;"></div>
+
+        <p ng-show="!window.localStorage.getItem('url')&&!window.localStorage.getItem('key')" id="petFeeder-markdown3" style="color:#D3D3D3;" class=" ">{{Data.messaging}}
+        </p>
+        <p ng-show="window.localStorage.getItem('url')&&window.localStorage.getItem('key')"  id="petFeeder-markdown4" style="color:#D3D3D3;" class=" ">Please set agent URL and Key under settings.
+        </p>
+    </ion-content>
 </ion-view>

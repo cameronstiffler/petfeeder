@@ -1,9 +1,5 @@
 angular.module('app.services', [])
 
-.factory('BlankFactory', [function(){
-
+.factory('Data', [function(){
+    return { key: '', url: '', amount:'5', messaging: '',settingsSet: 'false',feeding: 'false' };
 }])
-
-.service('BlankService', [function(){
-
-}]);
