@@ -27,7 +27,7 @@ angular.module('app.services', [])
           method  : 'POST',
           url     : window.localStorage.getItem('url'),
           data    : creds, 
-          timeout : 3000,
+          timeout : 30000,
           headers : {'Content-Type': 'application/x-www-form-urlencoded'}
          });
         }

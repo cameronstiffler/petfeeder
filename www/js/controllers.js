@@ -2,8 +2,8 @@ angular.module('app.controllers', [])
   
 .controller('petFeederCtrl', ['$scope', '$http', '$stateParams', 'Data', 'Imp',
 function ($scope, $http, $stateParams, Data, Imp) {
-    console.log($scope);
     $scope.Data = Data;
+    $scope.Data.feeding = false;
     if (window.localStorage.getItem('url')) { $scope.Data.url = window.localStorage.getItem('url') }
     if (window.localStorage.getItem('key')) { $scope.Data.key = window.localStorage.getItem('key') }
     if (window.localStorage.getItem('amount')) { $scope.Data.amount = window.localStorage.getItem('amount') }
@@ -12,16 +12,16 @@ function ($scope, $http, $stateParams, Data, Imp) {
         window.localStorage.setItem('url', Data.url);
         window.localStorage.setItem('key', Data.key);
         window.localStorage.setItem('amount', Data.amount);
-        Data.feeding = false;
         $scope.Data.action = 'feed';
-        Data.messaging = 'Sent amount '+Data.amount+' with key '+Data.key+' to '+Data.url+'. Waiting for response...'
-        console.log(Data);
-          $scope.Data.action = 'feed';
-          Data.feeding = true;
-          Imp.getTimes().success(function(response){
-              $scope.Data = response;
-              Data.messaging = 'Returned: ' + response.statusText;
-              console.log(response.statusText);
+        $scope.Data.feeding = true;
+        Data.messaging = 'Here we go!'
+        $scope.Data.action = 'feed';
+        Imp.getTimes().success(function(response){
+          $scope.Data.feeding = false;
+          $scope.Data.messaging = response.statusText;
+       }).error(function(response){
+         $scope.Data.feeding = false;
+         $scope.Data.messaging = 'Feeder did not respond';
        })
   }
 }])
@@ -36,10 +36,7 @@ function ($scope, $stateParams, Data) {
 
 .controller('timerDetailCtrl', ['$scope', '$http', '$stateParams', 'Data', 'Imp', 
 function ($scope, $http, $stateParams, Data, Imp) {
-    
-    console.log($scope);
     $scope.Data = Data;
-    
     if (window.localStorage.getItem('url')) { $scope.Data.url = window.localStorage.getItem('url') }
     if (window.localStorage.getItem('key')) { $scope.Data.key = window.localStorage.getItem('key') }
     //if (window.localStorage.getItem('amount')) { $scope.Data.amount = window.localStorage.getItem('amount') }
@@ -71,7 +68,6 @@ function ($scope, $stateParams, Data,$http,Imp) {
       }
       Imp.getTimes().success(function(response){
         $scope.times = response;
-        console.log(response);
       })
 }])
 

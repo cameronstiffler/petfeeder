@@ -7,17 +7,17 @@
         <h1 id="settings-heading2" style="color:#B4B4B4;text-align:center;" class=" ">Pet Feeder</h1>
         <form id="petFeeder-form1" ng-submit="submitForm(data)" class="list ">
             <div class="spacer" style="width: 300px; height: 33px;"></div>
-            <ion-item ng-hide="!Data.feeding" class="range " style="background-color:#000; color:#DDD; border:none; padding-bottom:60px; padding-top:25px" >Amount
+            <ion-item ng-hide="Data.feeding" class="range " style="background-color:#000; color:#DDD; border:none; padding-bottom:60px; padding-top:25px" >Amount
                 <input type="range" value="5" min="1" max="10" name="slider2" ng-model="Data.amount" id="amount">
             </ion-item>
-            <button  value="Submit" ng-disabled="!Data.key&&!Data.url" ng-hide="!Data.feeding" id="petFeeder-button1" style="font-weight:600;color:#222222;font-size:18px;border-radius:16px 16px 16px 16px;" class=" button button-energized  button-block ">Feed</button>
-            <img ng-hide="Data.feeding" src="img/cat.png" width="100%" height="auto" style="display: block; margin-left: auto; margin-right: auto;">
+            <button  value="Submit" ng-disabled="!Data.key&&!Data.url" ng-hide="Data.feeding" id="petFeeder-button1" style="font-weight:600;color:#222222;font-size:18px;border-radius:16px 16px 16px 16px;" class=" button button-energized  button-block ">Feed</button>
+            <img ng-hide="!Data.feeding" src="img/cat.png" width="100%" height="auto" style="display: block; margin-left: auto; margin-right: auto;">
 
         </form>
-        <div ng-hide="!Data.feeding" class="spacer" style="width: 300px; height: 41px;"></div>
-        <div ng-hide="!Data.feeding" class="spacer" style="width: 300px; height: 44px;"></div>
+        <div ng-hide="Data.feeding" class="spacer" style="width: 300px; height: 41px;"></div>
+ 
 
-        <p ng-show="!window.localStorage.getItem('url')&&!window.localStorage.getItem('key')" id="petFeeder-markdown3" style="color:#D3D3D3;" class=" ">{{Data.messaging}}
+        <p ng-show="!window.localStorage.getItem('url')&&!window.localStorage.getItem('key')" id="petFeeder-markdown3" style="color:#D3D3D3;" class=" "><div style="padding:30px;color:#DDD;text-align: center;"><strong>{{Data.messaging}}</strong></div>
         </p>
         <p ng-show="window.localStorage.getItem('url')&&window.localStorage.getItem('key')"  id="petFeeder-markdown4" style="color:#D3D3D3;" class=" ">Please set agent URL and Key under settings.
         </p>
