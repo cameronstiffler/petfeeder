@@ -30,6 +30,26 @@ angular.module('app.routes', [])
     }
   })
 
+  .state('tabsController.timersummary', {
+    url: '/timersummary',
+    views: {
+      'tab3': {
+        templateUrl: 'templates/timersummary.html',
+        controller: 'timerSummaryCtrl'
+      }
+    }
+  })
+
+    .state('tabsController.timerdetail', {
+    url: '/timerdetail',
+    views: {
+      'tab2': {
+        templateUrl: 'templates/timerdetail.html',
+        controller: 'timerDetailCtrl'
+      }
+    }
+  })
+
   .state('tabsController', {
     url: '/page1',
     templateUrl: 'templates/tabsController.html',
