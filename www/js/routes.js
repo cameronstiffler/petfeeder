@@ -43,7 +43,7 @@ angular.module('app.routes', [])
     .state('tabsController.timerdetail', {
     url: '/timerdetail',
     views: {
-      'tab2': {
+      'tab3': {
         templateUrl: 'templates/timerdetail.html',
         controller: 'timerDetailCtrl'
       }
@@ -57,7 +57,4 @@ angular.module('app.routes', [])
   })
 
 $urlRouterProvider.otherwise('/page1/home')
-
-  
-
 });

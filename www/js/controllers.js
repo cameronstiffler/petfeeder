@@ -43,13 +43,19 @@ function ($scope, $http, $stateParams, Data, Imp) {
 
     $scope.addTime = function() {
       $scope.Data.action = 'gettimes';
+      $scope.Data.feeding = true;
         Imp.getTimes().success(function(response){
           $scope.times = response;
           $scope.times.push({"id":0,"time":Data.hour+":"+Data.minute+" "+Data.ampm,"amount":Data.amount});
           $scope.Data.action = 'addtime';
           $scope.Data.times = $scope.times;
           Imp.getTimes().success(function(response){
-        })
+            $scope.Data.feeding = false;
+            $scope.Data.messaging = response.statusText;
+        }).error(function(response){
+         $scope.Data.feeding = false;
+         $scope.Data.messaging = 'Feeder did not respond';
+       })
       })
     }
 }])
