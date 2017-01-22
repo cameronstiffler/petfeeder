@@ -16,9 +16,10 @@ angular.module('app.services', [])
         times:[] };
 }])
 
-.factory('Times', ["$http","Data",function($http, Data){
+.factory('Imp', ["$http","Data",function($http, Data){
     return {  getTimes: function() {
-        console.log("Times service working");
+        console.log("Imp service working");
+        //console.log(Data)
         Data.key = window.localStorage.getItem('key');
         let creds = JSON.stringify(Data);
 

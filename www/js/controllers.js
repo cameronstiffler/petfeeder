@@ -1,8 +1,7 @@
 angular.module('app.controllers', [])
   
-.controller('petFeederCtrl', ['$scope', '$http', '$stateParams', 'Data',
-function ($scope, $http, $stateParams, Data) {
-    $scope.info = {};
+.controller('petFeederCtrl', ['$scope', '$http', '$stateParams', 'Data', 'Imp',
+function ($scope, $http, $stateParams, Data, Imp) {
     console.log($scope);
     $scope.Data = Data;
     if (window.localStorage.getItem('url')) { $scope.Data.url = window.localStorage.getItem('url') }
@@ -17,29 +16,14 @@ function ($scope, $http, $stateParams, Data) {
         $scope.Data.action = 'feed';
         Data.messaging = 'Sent amount '+Data.amount+' with key '+Data.key+' to '+Data.url+'. Waiting for response...'
         console.log(Data);
-        console.log(JSON.stringify($scope.Data));
-        let creds = JSON.stringify($scope.Data);
-
-        $http({
-          method  : 'POST',
-          url     : $scope.Data.url,
-          data    : creds, //forms user object
-          timeout : 3000,
-          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
-         })
-          .success(function(data) {
-            if (data.errors) {
-              Data.messaging = 'There was an error: ' + data.errors.name;
-              Data.feeding = true;
-              //$scope.errorName = data.errors.name;
-            } else {
-              Data.messaging = 'Returned: '+data.statusText;
-              console.log('Returned: '+data.statusTex);
-              $scope.message = data.message;
-              Data.feeding = true;
-            }
-          });
-        };
+          $scope.Data.action = 'feed';
+          Data.feeding = true;
+          Imp.getTimes().success(function(response){
+              $scope.Data = response;
+              Data.messaging = 'Returned: ' + response.statusText;
+              console.log(response.statusText);
+       })
+  }
 }])
    
 .controller('settingsCtrl', ['$scope', '$stateParams', 'Data' ,
@@ -50,8 +34,8 @@ function ($scope, $stateParams, Data) {
 }])
 
 
-.controller('timerDetailCtrl', ['$scope', '$http', '$stateParams', 'Data', 'Times', 
-function ($scope, $http, $stateParams, Data, Times) {
+.controller('timerDetailCtrl', ['$scope', '$http', '$stateParams', 'Data', 'Imp', 
+function ($scope, $http, $stateParams, Data, Imp) {
     
     console.log($scope);
     $scope.Data = Data;
@@ -62,20 +46,20 @@ function ($scope, $http, $stateParams, Data, Times) {
 
     $scope.addTime = function() {
       $scope.Data.action = 'gettimes';
-        Times.getTimes().success(function(response){
+        Imp.getTimes().success(function(response){
           $scope.times = response;
           $scope.times.push({"id":0,"time":Data.hour+":"+Data.minute+" "+Data.ampm,"amount":Data.amount});
           $scope.Data.action = 'addtime';
           $scope.Data.times = $scope.times;
-          Times.getTimes().success(function(response){
-        });
-      });
+          Imp.getTimes().success(function(response){
+        })
+      })
     }
 }])
 
 
-.controller('timerSummaryCtrl', ['$scope', '$stateParams', 'Data' ,'$http', 'Times',
-function ($scope, $stateParams, Data,$http,Times) { 
+.controller('timerSummaryCtrl', ['$scope', '$stateParams', 'Data' ,'$http', 'Imp',
+function ($scope, $stateParams, Data,$http,Imp) { 
     $scope.Data = Data;
     $scope.Data.action = 'gettimes';
     $scope.range = function(count){
@@ -85,10 +69,10 @@ function ($scope, $stateParams, Data,$http,Times) {
       }
       return bars;
       }
-      Times.getTimes().success(function(response){
+      Imp.getTimes().success(function(response){
         $scope.times = response;
-      });
-
+        console.log(response);
+      })
 }])
 
 
