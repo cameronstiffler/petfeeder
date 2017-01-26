@@ -10,7 +10,7 @@ angular.module('app.routes', [])
     
   
 
-      .state('tabsController.petFeeder', {
+  .state('tabsController.petFeeder', {
     url: '/home',
     views: {
       'tab1': {

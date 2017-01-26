@@ -7,15 +7,14 @@
         <h1 id="timersummary-heading1mary-heading1" style="color:#B4B4B4;text-align:center;" class=" ">Pet Feeder</h1>
     <div class="spacer" style="width: 300px; height: 33px;"></div>
      <ion-list id="cartTabDefaultPage-list2" style="background-color: #FFF;">
-     <a ng-repeat="feeding in times" href="" style="display:block; height:100%;width:100%;text-decoration: none;">
+     <a ng-click="removeTime(feeding.id)" ng-repeat="feeding in Data.times" href="" style="display:block; height:100%;width:100%;text-decoration: none;">
       <ion-item  class="item-icon-right" id="cartTabDefaultPage-list-item2" style="background-color: #FFF;">
         {{feeding.time}} &nbsp;&nbsp;
         <span style="width:10px;background-color: #ffc900;margin-right: 3px" ng-repeat="n in range(feeding.amount)">&nbsp;&nbsp;&nbsp;&nbsp;</span>
         <i class="icon ion-android-remove-circle" style="color: #a00"></i>
       </ion-item>
     </a>
-    <a href="#/page1/timerdetail" style="display:block; height:100%;width:100%;text-decoration: none;">
-
+    <a href="" ng-click="gotoAdd()" style="display:block; height:100%;width:100%;text-decoration: none;">
       <ion-item class="item-icon-right" id="cartTabDefaultPage-list-item3" style="background-color: #FFF;">
       Add Feeding Time
         <i class="icon ion-android-add-circle" style="color: #080"></i>

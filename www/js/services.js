@@ -1,5 +1,6 @@
 angular.module('app.services', [])
 
+//Data to be sent from app to agent
 .factory('Data', [function(){
     return { 
         key: '', 
@@ -12,14 +13,14 @@ angular.module('app.services', [])
         time:'6:00am',
         hour:'1',
         minute:'00',
+        id:'',
         ampm:'am',
         times:[] };
 }])
 
+//Imp service handles communication with agent
 .factory('Imp', ["$http","Data",function($http, Data){
     return {  getTimes: function() {
-        console.log("Imp service working");
-        //console.log(Data)
         Data.key = window.localStorage.getItem('key');
         let creds = JSON.stringify(Data);
 
