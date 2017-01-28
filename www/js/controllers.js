@@ -8,7 +8,6 @@ function ($scope, $http, $stateParams, Data, Imp) {
     if (window.localStorage.getItem('url')) { $scope.Data.url = window.localStorage.getItem('url') }
     if (window.localStorage.getItem('key')) { $scope.Data.key = window.localStorage.getItem('key') }
     if (window.localStorage.getItem('amount')) { $scope.Data.amount = window.localStorage.getItem('amount') }
-
     $scope.submitForm = function() {
         window.localStorage.setItem('url', Data.url);
         window.localStorage.setItem('key', Data.key);
@@ -17,13 +16,13 @@ function ($scope, $http, $stateParams, Data, Imp) {
         $scope.Data.feeding = true;
         Data.messaging = 'Here we go!'
         $scope.Data.action = 'feed';
-        Imp.getTimes().success(function(response){
+        Imp.getTimes().success(response => {
           $scope.Data.feeding = false;
           $scope.Data.messaging = response.statusText;
        })
        
        //Alert of failure if agent doesn't respond
-       .error(function(response){
+       .error(response => {
          $scope.Data.feeding = false;
          $scope.Data.messaging = 'Feeder did not respond';
        })
@@ -49,19 +48,19 @@ function ($scope, $http, $stateParams, Data, Imp, $state) {
     $scope.addTime = function() {
       $scope.Data.action = 'gettimes';
       $scope.Data.feeding = true;
-        Imp.getTimes().success(function(response){
+        Imp.getTimes().success(response => {
           $scope.times = response;
           $scope.times.push({"id":0,"time":Data.hour+":"+Data.minute+" "+Data.ampm,"amount":Data.amount});
           $scope.Data.action = 'addtime';
           angular.copy($scope.times, $scope.Data.times);
-          Imp.getTimes().success(function(response){
+          Imp.getTimes().success(response => {
             $scope.Data.feeding = false;
             angular.copy($scope.times, $scope.Data.times);
             $scope.Data.messaging = response.statusText;            
         })
 
         //Alert of failure if agent does not respond
-        .error(function(response){
+        .error(response => {
          $scope.Data.feeding = false;
          $scope.Data.messaging = 'Feeder did not respond';
        }) 
@@ -80,8 +79,8 @@ function ($scope, $stateParams, Data, $http ,Imp, $state) {
     $scope.Data.action = 'gettimes';
     $scope.Data.messaging = '';
     $scope.range = function(count){
-      var bars = []; 
-      for (var i = 0; i < count; i++) { 
+      let bars = []; 
+      for (let i = 0; i < count; i++) { 
         bars.push(i) 
       }
       return bars;
@@ -89,7 +88,7 @@ function ($scope, $stateParams, Data, $http ,Imp, $state) {
 
 
     //Get the existing feeding times from the agent
-    Imp.getTimes().success(function(response){
+    Imp.getTimes().success(response => {
       $scope.Data.times = response;
       //Save feeding times to local storage incase connection to agent is lost
       window.localStorage.setItem('times', $scope.times);
@@ -97,7 +96,7 @@ function ($scope, $stateParams, Data, $http ,Imp, $state) {
     })
     
     //Fail gracefully if agent not available
-    .error(function(response){
+    .error(response => {
         $scope.Data.feeding = false;
         $scope.Data.messaging = 'Feeder did not respond';
         //If data not available from agent get it from local storage
@@ -114,7 +113,7 @@ function ($scope, $stateParams, Data, $http ,Imp, $state) {
       $scope.Data.action = 'removetime';
       $scope.Data.id = id;//entry to remove
       $scope.Data.feeding = true;
-      Imp.getTimes().success(function(response){
+      Imp.getTimes().success(response => {
           //get the times back minus the removed one
           $scope.Data.times = response;
           $scope.Data.feeding = false;
@@ -122,7 +121,7 @@ function ($scope, $stateParams, Data, $http ,Imp, $state) {
        })
        
        //Alert of failure if agent doesn't respond
-       .error(function(response){
+       .error(response => {
          $scope.Data.feeding = false;
          $scope.Data.messaging = 'Feeder did not respond';
       })

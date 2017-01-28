@@ -12,6 +12,7 @@ angular.module('app.services', [])
         action:'feed',
         time:'6:00am',
         hour:'1',
+        clientTime:'',
         minute:'00',
         id:'',
         ampm:'am',
@@ -22,6 +23,7 @@ angular.module('app.services', [])
 .factory('Imp', ["$http","Data",function($http, Data){
     return {  getTimes: function() {
         Data.key = window.localStorage.getItem('key');
+        Data.clientTime = new Date();
         let creds = JSON.stringify(Data);
 
      return $http({
